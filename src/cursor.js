@@ -188,7 +188,7 @@ _.seek = function(target, pageX, pageY) {
 };
 _.writeLatex = function(latex) {
   this.deleteSelection();
-  latex = ( latex && latex.match(/\\text\{([^}]|\\\})*\}|\\[a-z]*|[^\s]/ig) ) || 0;
+  latex = ( latex && latex.match(/\\text\{([^}]|\\\})*\}|\\:|\\;|\\,|\\%|\\&|\\[a-z]*|[^\s]/ig) ) || 0;
   (function writeLatexBlock(cursor) {
     while (latex.length) {
       var token = latex.shift(); //pop first item
@@ -213,7 +213,7 @@ _.writeLatex = function(latex) {
         else //was an open-paren, hack to put the following latex
           latex.unshift('{'); //in the ParenBlock in the math DOM
       }
-      else if (/^\\[a-z]+$/i.test(token)) {
+      else if (/^\\[a-z:;,%&]+$/i.test(token)) {
         token = token.slice(1);
         var cmd = LatexCmds[token];
         if (cmd) {
@@ -234,6 +234,8 @@ _.writeLatex = function(latex) {
       else {
         if (token.match(/[a-eg-zA-Z]/)) //exclude f because want florin
           cmd = new Variable(token);
+        else if (token.match(/[:;,]/)) // these are backslash-sequences, not symbols (this is a hack)
+          cmd = new VanillaSymbol(token);
         else if (cmd = LatexCmds[token])
           cmd = new cmd;
         else
@@ -269,7 +271,8 @@ _.insertCh = function(ch) {
   var cmd;
   if (ch.match(/^[a-eg-zA-Z]$/)) //exclude f because want florin
     cmd = new Variable(ch);
-  else if (cmd = CharCmds[ch] || LatexCmds[ch])
+  else if ((cmd = CharCmds[ch] || LatexCmds[ch]) &&
+      !(ch.match(/[:;,]/))) // exclude spaces symbols here, they are backslash-sequences (this is also a hack)
     cmd = new cmd(this.selection, ch);
   else
     cmd = new VanillaSymbol(ch);
