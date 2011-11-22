@@ -161,7 +161,7 @@ _.respace = function() {
   return this;
 };
 
-LatexCmds['+'] = bind(PlusMinus, '+');
+LatexCmds['+'] = bind(PlusMinus, '+', '&plus;');
 LatexCmds['-'] = bind(PlusMinus, '-', '&minus;');
 LatexCmds.pm = LatexCmds.plusmn = LatexCmds.plusminus =
   bind(PlusMinus,'\\pm ','&plusmn;');
