@@ -315,8 +315,8 @@ LatexCmds.qquad = bind(VanillaSymbol,'\\qquad ','        ');
 LatexCmds[','] = bind(VanillaSymbol,'\\, ',' ');
 LatexCmds[':'] = bind(VanillaSymbol,'\\: ','  ');
 LatexCmds[';'] = bind(VanillaSymbol,'\\; ','   ');
-LatexCmds['%'] = bind(VanillaSymbol,'\\% ','<span style="margin-left:0.2em;magrin-right:0.2em;">%</span>');
-LatexCmds['&'] = bind(VanillaSymbol,'\\& ','<span style="margin-left:0.2em;magrin-right:0.2em;">&</span>');
+LatexCmds['%'] = bind(VanillaSymbol,'\\% ','<span style="margin-left:0.2em;margin-right:0.2em;">%</span>');
+LatexCmds['&'] = bind(VanillaSymbol,'\\& ','<span style="margin-left:0.2em;margin-right:0.2em;">&</span>');
 /* spacing special characters, gonna have to implement this in LatexCommandInput::textInput somehow
 case ',':
   return new VanillaSymbol('\\, ',' ');
