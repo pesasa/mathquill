@@ -187,6 +187,7 @@ function createRoot(jQ, root, textbox, editable) {
     if (textareaSelectionTimeout !== undefined)
       clearTimeout(textareaSelectionTimeout);
 
+// Pesasa: remove this to repair cut and paste in FF (or not)
     if (cursor.selection || textareaSelectionTimeout !== undefined)
       textarea.val('');
 
