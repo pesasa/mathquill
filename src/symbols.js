@@ -161,7 +161,9 @@ _.respace = function() {
   return this;
 };
 
-LatexCmds['+'] = bind(PlusMinus, '+', '&plus;');
+// LatexCmds['+'] = bind(PlusMinus, '+', '&plus;');
+// By pesasa: FF 3.5.x doesn't handel &plus; well.
+LatexCmds['+'] = bind(PlusMinus, '+');
 LatexCmds['-'] = bind(PlusMinus, '-', '&minus;');
 LatexCmds.pm = LatexCmds.plusmn = LatexCmds.plusminus =
   bind(PlusMinus,'\\pm ','&plusmn;');
@@ -173,8 +175,8 @@ CharCmds['*'] = LatexCmds.sdot = LatexCmds.cdot =
 //semantically should be &sdot;, but &middot; looks better
 
 LatexCmds['='] = bind(BinaryOperator, '=', '=');
-LatexCmds['lt'] = bind(BinaryOperator, '\\lt', '&lt;');
-LatexCmds['gt'] = bind(BinaryOperator, '\\gt', '&gt;');
+LatexCmds['lt'] = bind(BinaryOperator, '\\lt ', '&lt;');
+LatexCmds['gt'] = bind(BinaryOperator, '\\gt ', '&gt;');
 
 LatexCmds.notin =
 LatexCmds.sim =
@@ -207,9 +209,9 @@ LatexCmds.prop = LatexCmds.propto = bind(BinaryOperator,'\\propto ','&prop;');
 
 LatexCmds.asymp = LatexCmds.approx = bind(BinaryOperator,'\\approx ','&asymp;');
 
-LatexCmds['<'] = bind(BinaryOperator,'\\lt','&lt;');
+LatexCmds['<'] = bind(BinaryOperator,'\\lt ','&lt;');
 
-LatexCmds['>'] = bind(BinaryOperator,'\\gt','&gt;');
+LatexCmds['>'] = bind(BinaryOperator,'\\gt ','&gt;');
 
 LatexCmds.le = LatexCmds.leq = bind(BinaryOperator,'\\le ','&le;');
 
@@ -477,7 +479,9 @@ LatexCmds.rarr = LatexCmds.rightarrow = bind(VanillaSymbol,'\\rightarrow ','&rar
 
 LatexCmds.implies = bind(BinaryOperator,'\\Rightarrow ','&rArr;');
 
-LatexCmds.rArr = LatexCmds.Rightarrow = bind(VanillaSymbol,'\\Rightarrow ','&rArr;');
+// LatexCmds.rArr = LatexCmds.Rightarrow = bind(VanillaSymbol,'\\Rightarrow ','&rArr;');
+// By pesasa: change Rightarrow to binary operator
+LatexCmds.rArr = LatexCmds.Rightarrow = bind(BinaryOperator,'\\Rightarrow ','&rArr;');
 
 LatexCmds.gets = bind(BinaryOperator,'\\gets ','&larr;');
 
@@ -485,15 +489,20 @@ LatexCmds.larr = LatexCmds.leftarrow = bind(VanillaSymbol,'\\leftarrow ','&larr;
 
 LatexCmds.impliedby = bind(BinaryOperator,'\\Leftarrow ','&lArr;');
 
-LatexCmds.lArr = LatexCmds.Leftarrow = bind(VanillaSymbol,'\\Leftarrow ','&lArr;');
+// LatexCmds.lArr = LatexCmds.Leftarrow = bind(VanillaSymbol,'\\Leftarrow ','&lArr;');
+// By pesasa: change Leftarrow to binary operator
+LatexCmds.lArr = LatexCmds.Leftarrow = bind(BinaryOperator,'\\Leftarrow ','&lArr;');
 
 LatexCmds.harr = LatexCmds.lrarr = LatexCmds.leftrightarrow =
   bind(VanillaSymbol,'\\leftrightarrow ','&harr;');
 
 LatexCmds.iff = bind(BinaryOperator,'\\Leftrightarrow ','&hArr;');
 
+// LatexCmds.hArr = LatexCmds.lrArr = LatexCmds.Leftrightarrow =
+//   bind(VanillaSymbol,'\\Leftrightarrow ','&hArr;');
+// By pesasa: change Leftrightarrow to binary operator
 LatexCmds.hArr = LatexCmds.lrArr = LatexCmds.Leftrightarrow =
-  bind(VanillaSymbol,'\\Leftrightarrow ','&hArr;');
+  bind(BinaryOperator,'\\Leftrightarrow ','&hArr;');
 
 LatexCmds.Re = LatexCmds.Real = LatexCmds.real = bind(VanillaSymbol,'\\Re ','&real;');
 
@@ -513,10 +522,15 @@ LatexCmds.xist = //LOL
 LatexCmds.xists = LatexCmds.exist = LatexCmds.exists =
   bind(VanillaSymbol,'\\exists ','&exist;');
 
+// LatexCmds.and = LatexCmds.land = LatexCmds.wedge =
+//   bind(VanillaSymbol,'\\wedge ','&and;');
+// By pesasa: change and to binary operator
 LatexCmds.and = LatexCmds.land = LatexCmds.wedge =
-  bind(VanillaSymbol,'\\wedge ','&and;');
+  bind(BinaryOperator,'\\wedge ','&and;');
 
-LatexCmds.or = LatexCmds.lor = LatexCmds.vee = bind(VanillaSymbol,'\\vee ','&or;');
+// LatexCmds.or = LatexCmds.lor = LatexCmds.vee = bind(VanillaSymbol,'\\vee ','&or;');
+// By pesasa: change or to binary operator
+LatexCmds.or = LatexCmds.lor = LatexCmds.vee = bind(BinaryOperator,'\\vee ','&or;');
 
 LatexCmds.o = LatexCmds.O =
 LatexCmds.empty = LatexCmds.emptyset =
@@ -524,10 +538,15 @@ LatexCmds.oslash = LatexCmds.Oslash =
 LatexCmds.nothing = LatexCmds.varnothing =
   bind(BinaryOperator,'\\varnothing ','&empty;');
 
-LatexCmds.cup = LatexCmds.union = bind(VanillaSymbol,'\\cup ','&cup;');
+// LatexCmds.cup = LatexCmds.union = bind(VanillaSymbol,'\\cup ','&cup;');
+// By pesasa: change union to binary operator
+LatexCmds.cup = LatexCmds.union = bind(BinaryOperator,'\\cup ','&cup;');
 
+// LatexCmds.cap = LatexCmds.intersect = LatexCmds.intersection =
+//   bind(VanillaSymbol,'\\cap ','&cap;');
+// By pesasa: change intersection to binary operator
 LatexCmds.cap = LatexCmds.intersect = LatexCmds.intersection =
-  bind(VanillaSymbol,'\\cap ','&cap;');
+  bind(BinaryOperator,'\\cap ','&cap;');
 
 LatexCmds.deg = LatexCmds.degree = bind(VanillaSymbol,'^\\circ ','&deg;');
 

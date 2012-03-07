@@ -71,6 +71,9 @@ LatexCmds.mathit = bind(Style, '\\mathit', '<i class="font"></i>');
 LatexCmds.mathbf = bind(Style, '\\mathbf', '<b class="font"></b>');
 LatexCmds.mathsf = bind(Style, '\\mathsf', '<span class="sans-serif font"></span>');
 LatexCmds.mathtt = bind(Style, '\\mathtt', '<span class="monospace font"></span>');
+// Added by pesasa/pekasa for e-math
+LatexCmds.unit = bind(Style, '\\unit', '<span style="margin-left: 0.2em;" class="roman font unit"></span>');
+LatexCmds.solution = bind(Style, '\\solution', '<span class="solution"></span>');
 //text-decoration
 LatexCmds.underline = bind(Style, '\\underline', '<span class="underline"></span>');
 LatexCmds.overline = LatexCmds.bar = bind(Style, '\\overline', '<span class="overline"></span>');
