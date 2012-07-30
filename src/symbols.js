@@ -310,6 +310,24 @@ LatexCmds.QQ = bind(VanillaSymbol, '\\QQ','&#8474;');
 LatexCmds.RR = bind(VanillaSymbol, '\\RR','&#8477;');
 LatexCmds.CC = bind(VanillaSymbol, '\\CC','&#8450;');
 LatexCmds.HH = bind(VanillaSymbol, '\\HH','&#8461;');
+LatexCmds.AA = bind(VanillaSymbol, '\\AA','&#120120;');
+LatexCmds.BB = bind(VanillaSymbol, '\\BB','&#120121;');
+LatexCmds.DD = bind(VanillaSymbol, '\\DD','&#120123;');
+LatexCmds.EE = bind(VanillaSymbol, '\\EE','&#120124;');
+LatexCmds.FF = bind(VanillaSymbol, '\\FF','&#120125;');
+LatexCmds.GG = bind(VanillaSymbol, '\\GG','&#120126;');
+LatexCmds.II = bind(VanillaSymbol, '\\II','&#120128;');
+LatexCmds.JJ = bind(VanillaSymbol, '\\JJ','&#120129;');
+LatexCmds.KK = bind(VanillaSymbol, '\\KK','&#120130;');
+LatexCmds.LL = bind(VanillaSymbol, '\\LL','&#120131;');
+LatexCmds.MM = bind(VanillaSymbol, '\\MM','&#120132;');
+LatexCmds.OO = bind(VanillaSymbol, '\\OO','&#120134;');
+LatexCmds.SS = bind(VanillaSymbol, '\\SS','&#120138;');
+LatexCmds.TT = bind(VanillaSymbol, '\\TT','&#120139;');
+LatexCmds.UU = bind(VanillaSymbol, '\\UU','&#120140;');
+LatexCmds.VV = bind(VanillaSymbol, '\\VV','&#120141;');
+LatexCmds.XX = bind(VanillaSymbol, '\\XX','&#120142;');
+LatexCmds.YY = bind(VanillaSymbol, '\\YY','&#120143;');
 
 //spacing
 LatexCmds.quad = LatexCmds.emsp = bind(VanillaSymbol,'\\quad ','    ');

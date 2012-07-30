@@ -74,6 +74,7 @@ LatexCmds.mathtt = bind(Style, '\\mathtt', '<span class="monospace font"></span>
 // Added by pesasa/pekasa for e-math
 LatexCmds.unit = bind(Style, '\\unit', '<span style="margin-left: 0.2em;" class="roman font unit"></span>');
 LatexCmds.solution = bind(Style, '\\solution', '<span class="solution"></span>');
+LatexCmds.extramot = bind(Style, '\\extramot', '<span class="extramotivation"></span>');
 //text-decoration
 LatexCmds.underline = bind(Style, '\\underline', '<span class="underline"></span>');
 LatexCmds.overline = LatexCmds.bar = bind(Style, '\\overline', '<span class="overline"></span>');
@@ -301,6 +302,10 @@ LatexCmds.lparen = CharCmds['('] = proto(Paren, function(replacedFragment) {
 LatexCmds.lbrack = LatexCmds.lbracket = CharCmds['['] = proto(Paren, function(replacedFragment) {
   Paren.call(this, '[', ']', replacedFragment);
 });
+// Pesasa: test for nested pipes
+// LatexCmds.lpipe = LatexCmds.lpipe = CharCmds['|'] = proto(Paren, function(replacedFragment) {
+//   Bracket.call(this, '|', '|', '|', '¦', replacedFragment);
+// });
 
 function CloseParen(open, close, replacedFragment) {
   CloseBracket.call(this, open, close, open, close, replacedFragment);
@@ -313,6 +318,10 @@ LatexCmds.rparen = CharCmds[')'] = proto(CloseParen, function(replacedFragment) 
 LatexCmds.rbrack = LatexCmds.rbracket = CharCmds[']'] = proto(CloseParen, function(replacedFragment) {
   CloseParen.call(this, '[', ']', replacedFragment);
 });
+// Pesasa: test for nested pipes
+// LatexCmds.rpipe = LatexCmds.rpipe = CharCmds['¦'] = proto(CloseParen, function(replacedFragment) {
+//   CloseBracket.call(this, '|', '|', '|', '¦', replacedFragment);
+// });
 
 function Pipes(replacedFragment) {
   Paren.call(this, '|', '|', replacedFragment);
@@ -491,6 +500,10 @@ LatexCmds.uppercase =
   makeTextBlock('\\uppercase', '<span style="text-transform:uppercase" class="text"></span>');
 LatexCmds.lowercase =
   makeTextBlock('\\lowercase', '<span style="text-transform:lowercase" class="text"></span>');
+// Added by pesasa/pekasa for e-math
+// LatexCmds.extramot =
+//   makeTextBlock('\\extramot', '<span class="extramotivation"><span class="text extramotcontent"></span></span>');
+
 
 // input box to type a variety of LaTeX commands beginning with a backslash
 function LatexCommandInput(replacedFragment) {
@@ -591,6 +604,23 @@ _ = Choose.prototype = new Binomial;
 _.placeCursor = LiveFraction.prototype.placeCursor;
 
 LatexCmds.choose = Choose;
+
+//// Pesasa added \cases for E-math
+function Cases(replacedFragment) {
+  this.init('\\cases', undefined, undefined, replacedFragment);
+  this.jQ.wrapInner('<span class="array"></span>');
+  this.blockjQ = this.jQ.children();
+  this.bracketjQs =
+    $('<span class="paren">{</span>').prependTo(this.jQ)
+    .add( $('<span class="paren"></span>').appendTo(this.jQ) );
+}
+_ = Cases.prototype = new MathCommand;
+_.html_template =
+  ['<span class="block cases"></span>', '<span></span>', '<span></span>'];
+_.text_template = ['case(',',',')'];
+_.redraw = Bracket.prototype.redraw;
+LatexCmds.cases = LatexCmds.cases = Cases;
+
 
 function Vector(replacedFragment) {
   this.init('\\vector', undefined, undefined, replacedFragment);
