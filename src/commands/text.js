@@ -377,8 +377,11 @@ var RootTextBlock = P(RootMathBlock, function(_, super_) {
 API.TextField = function(APIClasses) {
   return P(APIClasses.EditableField, function(_, super_) {
     this.RootBlock = RootTextBlock;
-    _.__mathquillify = function() {
-      return super_.__mathquillify.call(this, 'mq-editable-field mq-text-mode');
+    _.__mathquillify = function(opts) {
+      this.config(opts);
+      super_.__mathquillify.call(this, 'mq-editable-field mq-text-mode');
+      delete this.__controller.root.reflow;
+      return this;
     };
     _.latex = function(latex) {
       if (arguments.length > 0) {
