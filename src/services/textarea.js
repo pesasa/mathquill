@@ -108,6 +108,26 @@ Controller.open(function(_) {
       }
     }
     // FIXME: this always inserts math or a TextBlock, even in a RootTextBlock
-    this.writeLatex(text).cursor.show();
+    if (this.KIND_OF_MQ === 'TextField') {
+        // In TextField type the pasted text char by char in text mode and with writeLatex in math mode.
+        var mathmode = this.root.jQ.find('.mq-cursor').closest('.mq-text-mode, .mq-math-mode').is('.mq-math-mode');
+        var textarr = text.split('$');
+        var splitchar = (textarr.length > 1 ? '$' : '');
+        for (var i = 0, len = textarr.length; i < len; i++) {
+            if (mathmode) {
+                this.writeLatex(textarr[i]);
+            } else {
+                for (var j = 0, jlen = textarr[i].length; j < jlen; j++) {
+                    this.typedText(textarr[i][j]);
+                };
+            };
+            if (splitchar && i < len - 1) {
+                this.typedText(splitchar);
+            };
+            mathmode = !mathmode;
+        };
+    } else {
+      this.writeLatex(text).cursor.show();
+    }
   };
 });
